@@ -3,16 +3,16 @@
 include 'config.php';
 include 'functions.php';
 
-if(isset($_POST['upload'])) {	
-	upload(); 
-	files_to_list();
+if ($_POST) {
+	if(isset($_POST['upload'])) {	
+		$upload = upload(); 
+	}
+
+	if(isset($_POST['delete'])) {
+		$delete = del(FILES_PATH.DS);
+	}
+	$result = files_to_list();
+	
 }
-
-if(isset($_POST['delete'])) {
-	del(FILES_PATH.DS);
-	files_to_list();
-}
-
-
+include 'templates/index.php';
 ?>
-
