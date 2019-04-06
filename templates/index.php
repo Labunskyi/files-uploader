@@ -26,21 +26,20 @@
 			<th>Delete</th>
         </tr>
     </thead>
-	<?php $i = 1; foreach($files_in_array as $files_data)
+	<?php $i = 1; foreach($result as $key => $value)
 	
 	{ ?>
 	
 	<tr>
-    
 		<td><?=$i++?></td>
-		<td><?=$files_data?></td>
+		<td><?=$key?></td>
 		<td >
-			<?=bites_to_kilobites(filesize(FILES_PATH.DS.$files_data))?>
+			<?=$value?>
 		</td>
 		<td >
-			<a href="<?=FILES_PATH.DS.$files_data?>">
+			<a href="<?=FILES_PATH.DS.$key?>">
 			<form method="post" enctype='multipart/form-data'>
-					<button type="submit" name="delete" value="<?=FILES_PATH.DS.$files_data?>" class="btn btn-sm btn-warning">Delete</button>
+					<button type="submit" name="delete" value="<?=FILES_PATH.DS.$key?>" class="btn btn-sm btn-warning">Delete</button>
 			</form>
 			</a>
 			
@@ -48,9 +47,11 @@
 	</tr>
 	<?php } ?>
 	</table>
+	<div><?php if(isset($_POST['upload'])) {	
+		echo $upload; 
+	}?></div>
 	</div>
 	</div>
 	</div>
 </body>
 </html>
-
