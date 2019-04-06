@@ -7,16 +7,16 @@ function upload(){
 		$tmp_name = $_FILES['filename']['tmp_name'];
 		$name = $_FILES['filename']['name'];
 		if (is_file($uploads_dir.DS.$name) && file_exists($uploads_dir.DS.$name)) {
-			echo "Such file exists"; 
-			return false;
+			$exist_file = "Such file exists"; 
+			return $exist_file;
 		} elseif ($_FILES['filename']['size'] > 2000000) {
-			echo "Such file exceed 2 Mb"; 
-			return false;
+			$exceed_file = "Such file exceed 2 Mb"; 
+			return $exceed_file;
 		}
 		else {
 			move_uploaded_file($tmp_name, $uploads_dir.DS.$name); 
-			echo "Файл " . $_FILES['filename']['name'] . " загружен"; 
-			return true;
+			$upload_file =  "Файл " . $_FILES['filename']['name'] . " загружен"; 
+			return $upload_file;
 		}
 	}
 }
@@ -29,17 +29,20 @@ function del() {
 	}
 
 }
-function bites_to_kilobites($bites) {
-	return (int) ($bites / 1024);
-}
 
 function files_to_list() {
 	$files_in_array = array_slice(scandir(FILES_PATH), 2);
-	ob_start();
-	include __DIR__ . '/templates/index.php';
-	$out = ob_get_clean();
-	echo $out;
-	return $out;
+	$res = [];
+	foreach ($files_in_array as $key => $value) {
+		$res[$key] = bites_to_kilobites(filesize(FILES_PATH.DS.$value));
+	}
+	$combine = array_combine($files_in_array, $res);
+	return $combine;
+
+}
+
+function bites_to_kilobites($bites) {
+	return (int) ($bites / 1024);
 }
 
 ?>
