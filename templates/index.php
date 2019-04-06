@@ -47,9 +47,13 @@
 	</tr>
 	<?php } ?>
 	</table>
-	<div><?php if(isset($_POST['upload'])) {	
-		echo $upload; 
-	}?></div>
+	<div>
+	<?php if(isset($_POST['upload'])) {	
+		echo $upload; }
+		if(isset($_POST['delete'])) {	
+		echo $delete; }
+	?>
+	</div>
 	</div>
 	</div>
 	</div>
