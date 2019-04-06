@@ -12,6 +12,10 @@ function upload(){
 		} elseif ($_FILES['filename']['size'] > 2000000) {
 			$exceed_file = "Such file exceed 2 Mb"; 
 			return $exceed_file;
+		} elseif ((substr(sprintf('%o', fileperms(FILES_PATH)), -4)) != '0777' ) {
+			//chmod(FILES_PATH, 0777);
+			$no_rights_file = "No rights for upload in this directory";
+			return $no_rights_file;
 		}
 		else {
 			move_uploaded_file($tmp_name, $uploads_dir.DS.$name); 
