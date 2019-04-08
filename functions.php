@@ -27,7 +27,8 @@ function upload(){
 
 function del() {
 	if (file_exists($_POST['delete'])) {
-		return unlink($_POST['delete']);
+		unlink($_POST['delete']);
+		return "File was deleted";
 	} else { 
 		return false;
 	}
