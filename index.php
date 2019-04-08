@@ -3,7 +3,7 @@
 include 'config.php';
 include 'functions.php';
 
-if ($_POST) {
+if (isset($_POST)) {
 	if(isset($_POST['upload'])) {	
 		$upload = upload(); 
 	}
