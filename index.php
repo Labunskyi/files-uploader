@@ -11,8 +11,12 @@ if (isset($_POST)) {
 	if(isset($_POST['delete'])) {
 		$delete = del(FILES_PATH.DS);
 	}
+	if (file_exists(FILES_PATH)) {
 	$result = files_to_list();
-	
+	} else {
+		$result = false;
+	}
 }
 include 'templates/index.php';
 ?>
+
