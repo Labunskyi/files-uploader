@@ -26,7 +26,9 @@
 			<th>Delete</th>
         </tr>
     </thead>
-	<?php $i = 1; foreach($result as $key => $value)
+	<?php 
+	if ($result) {
+	$i = 1; foreach($result as $key => $value)
 	
 	{ ?>
 	
@@ -45,7 +47,7 @@
 			
 		</td>
 	</tr>
-	<?php } ?>
+	<?php } }?>
 	</table>
 	<div>
 	<?php if(isset($_POST['upload'])) {	
@@ -59,3 +61,4 @@
 	</div>
 </body>
 </html>
+
