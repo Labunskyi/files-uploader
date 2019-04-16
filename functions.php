@@ -1,18 +1,13 @@
-
 <?php
-
 function upload(){
-
+	
 	if ($_FILES && $_FILES['filename']['error'] == UPLOAD_ERR_OK && ! empty($_FILES) && file_exists(FILES_PATH)) {
 		$uploads_dir = FILES_PATH;
 		$tmp_name = $_FILES['filename']['tmp_name'];
 		$name = $_FILES['filename']['name'];
 		
-		
 		if ((substr(sprintf('%o', fileperms($uploads_dir)), -4)) != '0777' ) {
-			//chmod(FILES_PATH, 0777);
-			$no_rights_file = "No rights for upload in this directory";
-			return $no_rights_file;
+			return "No rights for upload in this directory";
 		} elseif (is_file($uploads_dir.DS.$name) && file_exists($uploads_dir.DS.$name)) {
 			$exist_file = "Such file exists"; 
 			return $exist_file;
@@ -29,7 +24,6 @@ function upload(){
 	}
 	
 }
-
 function del() {
 	if (file_exists($_POST['delete'])) {
 		unlink($_POST['delete']);
@@ -37,11 +31,8 @@ function del() {
 	} else { 
 		return false;
 	}
-
 }
-
 function files_to_list() {
-
 		$files_in_array = array_slice(scandir(FILES_PATH), 2);
 		$res = [];
 		foreach ($files_in_array as $key => $value) {
@@ -50,10 +41,7 @@ function files_to_list() {
 		$combine = array_combine($files_in_array, $res);
 		return $combine;
 }
-
 function bites_to_kilobites($bites) {
 	return (int) ($bites / 1024);
 }
-
 ?>
-
